@@ -34,10 +34,10 @@ namespace CommandLineCalculator
                     Console.WriteLine("Invalid input format. Please use: operation number1 number2");
                     continue;
                 }
-                
+
                 // TODO: Implement parsing numbers and performing calculations
                 // This is where you will add your code
-                
+
                 // Example implementation for addition:
                 if (parts[0].ToLower() == "add")
                 {
@@ -51,6 +51,42 @@ namespace CommandLineCalculator
                     }
                 }
                 // TODO: Implement subtract, multiply, divide operations
+                if (parts[0].ToLower() == "sub")
+                {
+                    if (double.TryParse(parts[1], out double num1) && double.TryParse(parts[2], out double num2))
+                    {
+                        Console.WriteLine($"Result: {num1 - num2}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid numbers provided");
+                    }
+                }
+
+                if (parts[0].ToLower() == "mul")
+                {
+                    if (double.TryParse(parts[1], out double num1) && double.TryParse(parts[2], out double num2))
+                    {
+                        Console.WriteLine($"Result: {num1 * num2}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid numbers provided");
+                    }
+                }
+
+                if (parts[0].ToLower() == "div")
+                {
+                    if (double.TryParse(parts[1], out double num1) && double.TryParse(parts[2], out double num2))
+                    {
+                        Console.WriteLine($"Result: {num1 / num2}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid numbers provided");
+                    }
+                }
+
             }
         }
     }
