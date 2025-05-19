@@ -45,7 +45,37 @@ namespace FileAnalyzer
                 // Example implementation for counting lines:
                 int lineCount = File.ReadAllLines(filePath).Length;
                 Console.WriteLine($"Number of lines: {lineCount}");
-                
+
+                var words = Regex.Split(content, @"\W+").where(w => !string.IsNullOrEmpty(w)).ToArray();
+
+                int wordCount = words.Length;
+                Console.WriteLine($"2. Number of words: {wordCount}");
+
+                int charCountWithSpaces = content.Length;
+                int charCountWithoutSpaces = content.Count(c => !char.IsWhiteSpace(c));
+                Console.WriteLine($"3.1 Characters (with spaces): {charCountWithSpaces}");
+                Console.WriteLine($"3.2 Characters (without spaces): {charCountWithoutSpaces}");
+
+                int sentenceCount = Regex.Matches(content, @"[\.!?]+").Count;
+                Console.WriteLine($"4. Number of sentences: {sentenceCount}");
+
+                var topWords = words.GroupBy(w => w.ToLower()).OrderByDescending(g => g.Count()).Take(5).Select(g => new
+                    {                         
+                        Word = g.Key,
+                        Count = g.Count()
+                    });
+
+                Console.WriteLine("5. Top 5 most common words:");
+                foreach (var item in topWords)
+                {
+                    Console.WriteLine($"   - \"{item.Word}\": {item.Count} times");
+                }
+
+                double averageWordLength = wordCount > 0
+                    ? words.Average(w => w.Length)
+                    : 0;
+                Console.WriteLine($"6. Average word length: {averageWordLength:F2} words");
+
                 // TODO: Additional analysis to be implemented
             }
             catch (Exception ex)
